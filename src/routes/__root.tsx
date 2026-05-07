@@ -9,6 +9,9 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { CartProvider } from "@/lib/cart-store";
+import { StaffProvider } from "@/lib/staff-store";
+import { Toaster } from "sonner";
 
 function NotFoundComponent() {
   return (
@@ -72,14 +75,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Cardápio Digital — PrositeStudio" },
+      { name: "description", content: "Sistema de pedidos em tempo real para restaurantes." },
+      { name: "author", content: "PrositeStudio" },
+      { property: "og:title", content: "Cardápio Digital — PrositeStudio" },
+      { property: "og:description", content: "Sistema de pedidos em tempo real para restaurantes." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Cardápio Digital — PrositeStudio" },
+      { name: "twitter:description", content: "Sistema de pedidos em tempo real para restaurantes." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/dcb6f4f0-00f4-42ee-8acc-6c9be9e27534/id-preview-42e66a2c--5e1b05e5-8721-412e-b267-d949bf29c4da.lovable.app-1778102004332.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/dcb6f4f0-00f4-42ee-8acc-6c9be9e27534/id-preview-42e66a2c--5e1b05e5-8721-412e-b267-d949bf29c4da.lovable.app-1778102004332.png" },
     ],
     links: [
       {
@@ -113,7 +120,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <StaffProvider>
+        <CartProvider>
+          <Outlet />
+          <Toaster position="top-center" richColors />
+        </CartProvider>
+      </StaffProvider>
     </QueryClientProvider>
   );
 }
