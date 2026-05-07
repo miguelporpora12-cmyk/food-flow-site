@@ -6,6 +6,7 @@ import { fmtBRL } from "@/lib/cart-store";
 import { ChevronRight } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { getClienteId } from "@/lib/client-id";
+import { useStaff } from "@/lib/staff-store";
 
 export const Route = createFileRoute("/pedidos")({
   component: PedidosPage,
@@ -15,16 +16,18 @@ type Pedido = { id: string; mesa: number; status: string; total: number; created
 
 function PedidosPage() {
   const clienteId = useMemo(() => getClienteId(), []);
+  const { isStaff } = useStaff();
 
   const q = useQuery({
-    queryKey: ["pedidos-list", clienteId],
+    queryKey: ["pedidos-list", isStaff ? "all" : clienteId],
     queryFn: async () => {
-      const { data, error } = await supabase
+      let query = supabase
         .from("pedidos")
         .select("*")
-        .eq("cliente_id", clienteId)
         .order("created_at", { ascending: false })
         .limit(50);
+      if (!isStaff) query = query.eq("cliente_id", clienteId);
+      const { data, error } = await query;
       if (error) throw error;
       return data as Pedido[];
     },
@@ -42,8 +45,10 @@ function PedidosPage() {
 
   return (
     <AppShell>
-      <h1 className="text-2xl font-bold">Meus pedidos</h1>
-      <p className="text-sm text-muted-foreground">Apenas seus pedidos aparecem aqui.</p>
+      <h1 className="text-2xl font-bold">{isStaff ? "Todos os pedidos" : "Meus pedidos"}</h1>
+      <p className="text-sm text-muted-foreground">
+        {isStaff ? "Visão completa de todos os pedidos." : "Apenas seus pedidos aparecem aqui."}
+      </p>
       <ul className="mt-5 space-y-3">
         {q.data?.map((p) => (
           <li key={p.id}>
