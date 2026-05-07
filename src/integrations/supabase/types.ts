@@ -14,167 +14,7 @@ export type Database = {
   }
   public: {
     Tables: {
-      avisos: {
-        Row: {
-          ativo: boolean
-          id: string
-          mensagem: string
-          updated_at: string
-        }
-        Insert: {
-          ativo?: boolean
-          id?: string
-          mensagem?: string
-          updated_at?: string
-        }
-        Update: {
-          ativo?: boolean
-          id?: string
-          mensagem?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      categorias: {
-        Row: {
-          created_at: string
-          id: string
-          nome: string
-          ordem: number
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          nome: string
-          ordem?: number
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          nome?: string
-          ordem?: number
-        }
-        Relationships: []
-      }
-      itens: {
-        Row: {
-          categoria_id: string | null
-          created_at: string
-          descricao: string | null
-          disponivel: boolean
-          id: string
-          imagem_url: string | null
-          nome: string
-          preco: number
-        }
-        Insert: {
-          categoria_id?: string | null
-          created_at?: string
-          descricao?: string | null
-          disponivel?: boolean
-          id?: string
-          imagem_url?: string | null
-          nome: string
-          preco?: number
-        }
-        Update: {
-          categoria_id?: string | null
-          created_at?: string
-          descricao?: string | null
-          disponivel?: boolean
-          id?: string
-          imagem_url?: string | null
-          nome?: string
-          preco?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "itens_categoria_id_fkey"
-            columns: ["categoria_id"]
-            isOneToOne: false
-            referencedRelation: "categorias"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      pedido_itens: {
-        Row: {
-          created_at: string
-          id: string
-          item_id: string | null
-          nome: string
-          pedido_id: string
-          preco_unitario: number
-          quantidade: number
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          item_id?: string | null
-          nome: string
-          pedido_id: string
-          preco_unitario: number
-          quantidade?: number
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          item_id?: string | null
-          nome?: string
-          pedido_id?: string
-          preco_unitario?: number
-          quantidade?: number
-        }
-        Relationships: [
-          {
-            foreignKeyName: "pedido_itens_item_id_fkey"
-            columns: ["item_id"]
-            isOneToOne: false
-            referencedRelation: "itens"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "pedido_itens_pedido_id_fkey"
-            columns: ["pedido_id"]
-            isOneToOne: false
-            referencedRelation: "pedidos"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      pedidos: {
-        Row: {
-          cliente_id: string | null
-          created_at: string
-          id: string
-          mesa: number
-          observacao: string | null
-          status: Database["public"]["Enums"]["pedido_status"]
-          total: number
-          updated_at: string
-        }
-        Insert: {
-          cliente_id?: string | null
-          created_at?: string
-          id?: string
-          mesa: number
-          observacao?: string | null
-          status?: Database["public"]["Enums"]["pedido_status"]
-          total?: number
-          updated_at?: string
-        }
-        Update: {
-          cliente_id?: string | null
-          created_at?: string
-          id?: string
-          mesa?: number
-          observacao?: string | null
-          status?: Database["public"]["Enums"]["pedido_status"]
-          total?: number
-          updated_at?: string
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
@@ -183,12 +23,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      pedido_status:
-        | "confirmado"
-        | "preparando"
-        | "quase_pronto"
-        | "saiu_entrega"
-        | "entregue"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
@@ -315,14 +150,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      pedido_status: [
-        "confirmado",
-        "preparando",
-        "quase_pronto",
-        "saiu_entrega",
-        "entregue",
-      ],
-    },
+    Enums: {},
   },
 } as const
