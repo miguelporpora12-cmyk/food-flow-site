@@ -91,7 +91,7 @@ function PreparoPage() {
   return (
     <AppShell>
       <div className="animate-float-up flex flex-col items-center px-2 py-4 text-center">
-        <div className="relative w-full max-w-[320px]">
+        <div className="relative mx-auto w-full max-w-[280px] overflow-hidden rounded-full bg-primary-soft p-4 shadow-soft">
           {showWaiter ? (
             <video
               src="/animations/waiter.mp4"
@@ -99,7 +99,7 @@ function PreparoPage() {
               loop
               muted
               playsInline
-              className="mx-auto h-auto w-full"
+              className="mx-auto h-auto w-full [mix-blend-mode:multiply]"
             />
           ) : (
             <video
@@ -108,7 +108,7 @@ function PreparoPage() {
               loop
               muted
               playsInline
-              className="mx-auto h-auto w-full"
+              className="mx-auto h-auto w-full [mix-blend-mode:multiply]"
             />
           )}
         </div>
