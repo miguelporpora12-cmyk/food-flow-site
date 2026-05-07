@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/AppShell";
 import { Check, ShoppingBag, Clock, UserRound, Lightbulb, Megaphone } from "lucide-react";
 import { CURIOSIDADES } from "@/lib/curiosidades";
-import waiterImg from "@/assets/waiter.png";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 export const Route = createFileRoute("/preparo/$pedidoId")({
   component: PreparoPage,
@@ -94,12 +94,11 @@ function PreparoPage() {
       <div className="animate-float-up flex flex-col items-center px-2 py-4 text-center">
         <div className="relative w-full max-w-[320px]">
           {showWaiter ? (
-            <img
-              src={waiterImg}
-              alt="Garçom levando o pedido"
-              width={320}
-              height={320}
-              className="mx-auto h-auto w-full animate-float-up"
+            <DotLottieReact
+              src="/animations/waiter.lottie"
+              autoplay
+              loop
+              className="mx-auto h-auto w-full"
             />
           ) : (
             <video
