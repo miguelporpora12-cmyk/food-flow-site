@@ -92,13 +92,15 @@ function CardapioPage() {
       <section className="mt-4 grid grid-cols-1 gap-3">
         {(itens.isLoading || cats.isLoading) && (
           <div className="flex flex-col items-center justify-center py-10">
-            <DotLottieReact
-              src="/animations/loading.lottie"
-              autoplay
-              loop
-              className="h-32 w-32"
-            />
-            <p className="mt-2 text-sm font-medium text-muted-foreground">Carregando cardápio...</p>
+            <div className="flex h-32 w-32 items-center justify-center rounded-full bg-primary-soft p-3 shadow-soft">
+              <DotLottieReact
+                src="/animations/loading.lottie"
+                autoplay
+                loop
+                className="h-full w-full [mix-blend-mode:multiply]"
+              />
+            </div>
+            <p className="mt-3 text-sm font-medium text-primary">Carregando cardápio...</p>
           </div>
         )}
         {filtered.map((i, idx) => (
